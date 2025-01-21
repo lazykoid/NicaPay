@@ -1,9 +1,10 @@
 from discord.ext import commands
 import discord
+import payment
 
-async def send_embedded_message(channel_id,bot):
+async def paymentMessage(id:int,bot):
     # Get the channel object
-    channel = bot.get_channel(channel_id)
+    channel = bot.get_channel(id)
     
     # Create an embedded message
     embed = discord.Embed(
@@ -18,7 +19,26 @@ async def send_embedded_message(channel_id,bot):
     )
 
     # Send the embedded message to the channel
-    await channel.send(embed=embed)
+    message = await channel.send(embed=embed)
+    
+    # Add reactions as buttons
+    await message.add_reaction('👍')  # Plano 1
+    await message.add_reaction('👎')  # Plano 2
+    await message.add_reaction('🤝')  # Plano 3
+
+    # Wait for user reaction
+    def check(reaction, user):
+        return user != bot.user and reaction.message == message
+
+    reaction, user = await bot.wait_for('reaction_add', check=check)
+
+    # Handle user reaction
+    if reaction.emoji == '👍':
+        await channel.send('Você selecionou o Plano 1!')
+    elif reaction.emoji == '👎':
+        await channel.send('Você selecionou o Plano 2!')
+    elif reaction.emoji == '🤝':
+        await channel.send('Você selecionou o Plano 3!')
 
 async def deleteChat(id:int,bot):
     tmp = bot.get_channel(1330954025767800954)
