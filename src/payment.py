@@ -1,6 +1,7 @@
 import mercadopago
+# Inicializando o SDK do Mercado Pago com a chave de aplicativo
 sdk = mercadopago.SDK("APP_USR-2733442010410611-012009-a605d25617a3512ac258afe7e6b62021-2224050184")
-
+# Definindo os itens disponíveis para compra num dicionario-lista.
 requests = {
     "items": [
         {
@@ -55,7 +56,7 @@ requests = {
         },
     ]
 }
-
+# Função para criar um pagamento baseado no ID do item
 def createPayment(id: int):
     match id:
         case 1:
@@ -71,6 +72,7 @@ def createPayment(id: int):
         case _:
             return None  # Caso não encontre nenhum item correspondente
 
+# Função para fazer uma requisição de pagamento com os dados do pedido
 def makeRequest(order:dict):
 	preference_response = sdk.preference().create(order)
 	preference = preference_response["response"]

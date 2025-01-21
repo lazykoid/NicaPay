@@ -2,14 +2,14 @@ from discord.ext import commands
 import discord
 import payment
 
+# Função para enviar uma mensagem de pagamento
 async def paymentMessage(id:int,bot):
     def checkUserReaction(reaction, user):
         return user != bot.user and reaction.message == message
     
-    # Get the channel object
     channel = bot.get_channel(id)
     
-    # Create an embedded message
+    # Cria uma mensagem incorporada (embed) com informações sobre os planos de servidores
     embed = discord.Embed(
         title="Planos de Servidores!",
         type="rich",
@@ -41,10 +41,10 @@ async def paymentMessage(id:int,bot):
     embed.set_footer(
         text="@koidfas"
     )
-    # Send the embedded message to the channel
+    
     message = await channel.send(embed=embed)
     
-    # Add reactions as buttons
+    # Adiciona Reacoes
     await message.add_reaction('❤️')  
     await message.add_reaction('🤎')  
     await message.add_reaction('💚')
@@ -52,6 +52,7 @@ async def paymentMessage(id:int,bot):
     await message.add_reaction('💜')
     await message.add_reaction('❔')
 
+    # Check para reação
     reaction, user = await bot.wait_for('reaction_add', check=checkUserReaction)
 
     if reaction.emoji == '❤️':
@@ -90,7 +91,7 @@ async def paymentMessage(id:int,bot):
             """)
         await channel.send('Enviamos uma mensagem no seu privado!')
 
-
+# Função para apagar mensagens antigas no canal
 async def deleteChat(id:int,bot):
     tmp = bot.get_channel(1330954025767800954)
     async for message in tmp.history(limit=1):
