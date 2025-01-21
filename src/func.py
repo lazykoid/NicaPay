@@ -82,7 +82,7 @@ async def paymentMessage(id:int,bot):
             5. Atendimento Prioritário: Com o **Suporte Especializado**, você terá acesso a **atendimento prioritário**. Isso significa que suas solicitações e dúvidas serão tratadas com urgência, garantindo que você obtenha respostas e soluções mais rapidamente.
 
         Aproveite essa oportunidade para ter um servidor Minecraft **configurado e mantido por profissionais**, permitindo que você se concentre apenas em se divertir!          
-                """)
+            """)
         await channel.send('Enviamos uma mensagem no seu privado!')
 
 
