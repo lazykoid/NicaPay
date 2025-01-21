@@ -35,11 +35,20 @@ async def paymentMessage(id:int,bot):
     
     await channel.send('Após o pagamento, enviar comprovante para <@765732852054491167>!')
 
-    # Check para reação
-    reactions = []
-    while len(reactions) < 3:
+    user_reactions = {}
+    while True:
         reaction, user = await bot.wait_for('reaction_add', check=checkUserReaction)
-        reactions.append(reaction.emoji)
+
+        # Checa se os usuarios já reagiram 3 vezes
+        if user.id in user_reactions and sum(user_reactions[user.id].values()) >= 3:
+            await user.send("Você já reagiu 3 vezes, Tente novamente mais tarde!")
+            continue
+
+        # Incrementa o counter para cada usuario
+        if user.id not in user_reactions:
+            user_reactions[user.id] = {}
+        if reaction.emoji not in user_reactions[user.id]:
+            user_reactions[user.id][reaction.emoji] = user_reactions[user.id].get(reaction.emoji, 0) + 1
 
         if reaction.emoji == '❤️':
             await user.send('Você selecionou o Plano 4Gb!')

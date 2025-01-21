@@ -77,5 +77,3 @@ def makeRequest(order:dict):
     preference_response = sdk.preference().create(order)
     preference = preference_response["response"]
     return preference['init_point']
-
-print(makeRequest(createPayment(1)))
