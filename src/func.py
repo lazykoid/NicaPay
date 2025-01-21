@@ -43,14 +43,24 @@ async def paymentMessage(id:int,bot):
 
         if reaction.emoji == '❤️':
             await user.send('Você selecionou o Plano 4Gb!')
+            order = payment.createPayment(1)
+            await user.send(payment.makeRequest(order))
         elif reaction.emoji == '🤎':
             await user.send('Você selecionou o Plano 6Gb!')
+            order = payment.createPayment(2)
+            await user.send(payment.makeRequest(order))
         elif reaction.emoji == '💚':
             await user.send('Você selecionou o Plano 8Gb!')
+            order = payment.createPayment(3)
+            await user.send(payment.makeRequest(order))
         elif reaction.emoji == '💛':
             await user.send('Você selecionou o Plano 12Gb!')
+            order = payment.createPayment(4)
+            await user.send(payment.makeRequest(order))
         elif reaction.emoji == '💜':
             await user.send('Você selecionou o Plano 16Gb!')
+            order = payment.createPayment(5)
+            await user.send(payment.makeRequest(order))
         elif reaction.emoji == '❔':
             await user.send("# Suporte Especializado\nNosso **Suporte Especializado** foi criado para oferecer uma **experiência completa e personalizada** para os jogadores de Minecraft que desejam **otimizar seus servidores e modpacks**. \nCom uma taxa adicional de apenas **R$ 9,90**, você terá acesso a uma série de serviços que garantem que seu servidor esteja sempre funcionando da melhor forma possível. \n## **Veja o que está incluído:**\n### Configuração de Servidores: \nNossa equipe especializada irá **configurar seu servidor Minecraft** de acordo com suas necessidades, garantindo que tudo esteja pronto para você e seus amigos jogarem sem complicações.\n### Configuração de Modpacks: \nSe você deseja jogar com **modpacks personalizados**, cuidaremos de toda a configuração necessária, garantindo que todos os mods funcionem perfeitamente juntos.\n### Criação de Modpacks: \nSe você tem uma ideia específica em mente, podemos ajudar a **criar um modpack personalizado** que atenda às suas expectativas e ao estilo de jogo desejado.\n### Manutenção do Servidor: \nMantemos seu servidor **atualizado e funcionando sem problemas.** Isso inclui atualizações regulares, monitoramento de desempenho e resolução de quaisquer problemas que possam surgir.\n### Atendimento Prioritário: \nCom o **Suporte Especializado**, você terá acesso a **atendimento prioritário**. Isso significa que suas solicitações e dúvidas serão tratadas com urgência, garantindo que você obtenha respostas e soluções mais rapidamente.\nAproveite essa oportunidade para ter um servidor Minecraft **configurado e mantido por profissionais**, permitindo que você se concentre apenas em se divertir!")
 
