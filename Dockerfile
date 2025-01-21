@@ -16,8 +16,5 @@ RUN echo "discord.py\nmercadopago" > requirements.txt
 # Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Ensure the run.sh script is executable
-RUN chmod +x run.sh
-
 # Command to run the script
-CMD ["./run.sh"]
+CMD ["python3", "bot.py"]
