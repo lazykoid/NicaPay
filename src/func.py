@@ -13,27 +13,7 @@ async def paymentMessage(id:int,bot):
     embed = discord.Embed(
         title="Planos de Servidores!",
         type="rich",
-        description="""
-            ## 4Gb RAM e Processamento Padrão - R$ 29,90
-            ### Recomendado para SMP/Survival Vanilla Pequenos.
-            Clique no ❤️ para selecionar-lo!
-            ## 6Gb RAM e Processamento Padrão - R$ 39,90
-            ### Recomendado para Modpacks Médios e até 6 players
-            Clique no 🤎 para selecionar-lo!
-            ## 8Gb RAM e Processamento Avançado - R$ 49,90 
-            ### Recomendado para Modpacks Médios/Grandes e até 8 players
-            Clique no 💚 para selecionar-lo!
-            ## 12Gb RAM e Processamento Extremo - R$ 69,90
-            ### Recomendado para Modpacks Grandes e até 12+ players
-            Clique no 💛 para selecionar-lo!
-            ## 16Gb RAM e Processamento Extremo - R$ 89,90
-            ### Recomendado para Modpacks Grandes e até 16+ players
-            Clique no 💜 para selecionar-lo!
-
-            **Suporte Especializado será acrescentado mais R$ 9,90!
-            Para saber mais sobre o Suporte Especializado clique no 👻
-            ** 
-        """,
+        description="## 4Gb RAM e Processamento Padrão - R$ 29,90\n### Recomendado para SMP/Survival Vanilla Pequenos.\nClique no ❤️ para selecionar-lo!\n## 6Gb RAM e Processamento Padrão - R$ 39,90\n### Recomendado para Modpacks Médios e até 6 players\nClique no 🤎 para selecionar-lo!\n## 8Gb RAM e Processamento Avançado - R$ 49,90 \n### Recomendado para Modpacks Médios/Grandes e até 8 players\n Clique no 💚 para selecionar-lo!\n## 12Gb RAM e Processamento Extremo - R$ 69,90\n### Recomendado para Modpacks Grandes e até 12+ players\n Clique no 💛 para selecionar-lo!\n## 16Gb RAM e Processamento Extremo - R$ 89,90\n### Recomendado para Modpacks Grandes e até 16+ players\nClique no 💜 para selecionar-lo!\n\n**Suporte Especializado será acrescentado mais R$ 9,90!\nPara saber mais sobre o Suporte Especializado clique no ❔** ",
         color=discord.Color.from_str("#6eaf5e"),
         timestamp=discord.utils.utcnow()
     )
@@ -51,45 +31,28 @@ async def paymentMessage(id:int,bot):
     await message.add_reaction('💛')
     await message.add_reaction('💜')
     await message.add_reaction('❔')
+    
+    
+    await channel.send('Após o pagamento, enviar comprovante para <@765732852054491167>!')
 
     # Check para reação
-    reaction, user = await bot.wait_for('reaction_add', check=checkUserReaction)
+    reactions = []
+    while len(reactions) < 3:
+        reaction, user = await bot.wait_for('reaction_add', check=checkUserReaction)
+        reactions.append(reaction.emoji)
 
-    if reaction.emoji == '❤️':
-        await channel.send('Você selecionou o Plano 4Gb!')
-        await channel.send('Após o pagamento, enviar comprovante para @koidfas!')
-    elif reaction.emoji == '🤎':
-        await channel.send('Você selecionou o Plano 6Gb!')
-        await channel.send('Após o pagamento, enviar comprovante para @koidfas!')
-    elif reaction.emoji == '💚':
-        await channel.send('Você selecionou o Plano 8Gb!')
-        await channel.send('Após o pagamento, enviar comprovante para @koidfas!')
-    elif reaction.emoji == '💛':
-        await channel.send('Você selecionou o Plano 12Gb!')
-        await channel.send('Após o pagamento, enviar comprovante para @koidfas!')
-    elif reaction.emoji == '💜':
-        await channel.send('Você selecionou o Plano 16Gb!')
-        await channel.send('Após o pagamento, enviar comprovante para @koidfas!')
-    elif reaction.emoji == '❔':
-        await user.send("""
-        # Suporte Especializado
-
-        Nosso **Suporte Especializado** foi criado para oferecer uma **experiência completa e personalizada** para os jogadores de Minecraft que desejam **otimizar seus servidores e modpacks**. 
-        Com uma taxa adicional de apenas **R$ 9,90**, você terá acesso a uma série de serviços que garantem que seu servidor esteja sempre funcionando da melhor forma possível. Veja o que está incluído:
-
-            1. Configuração de Servidores: Nossa equipe especializada irá **configurar seu servidor Minecraft** de acordo com suas necessidades, garantindo que tudo esteja pronto para você e seus amigos jogarem sem complicações.
-
-            2. Configuração de Modpacks: Se você deseja jogar com **modpacks personalizados**, cuidaremos de toda a configuração necessária, garantindo que todos os mods funcionem perfeitamente juntos.
-
-            3. Criação de Modpacks: Se você tem uma ideia específica em mente, podemos ajudar a **criar um modpack personalizado** que atenda às suas expectativas e ao estilo de jogo desejado.
-
-            4. Manutenção do Servidor: Mantemos seu servidor **atualizado e funcionando sem problemas.** Isso inclui atualizações regulares, monitoramento de desempenho e resolução de quaisquer problemas que possam surgir.
-
-            5. Atendimento Prioritário: Com o **Suporte Especializado**, você terá acesso a **atendimento prioritário**. Isso significa que suas solicitações e dúvidas serão tratadas com urgência, garantindo que você obtenha respostas e soluções mais rapidamente.
-
-        Aproveite essa oportunidade para ter um servidor Minecraft **configurado e mantido por profissionais**, permitindo que você se concentre apenas em se divertir!          
-            """)
-        await channel.send('Enviamos uma mensagem no seu privado!')
+        if reaction.emoji == '❤️':
+            await user.send('Você selecionou o Plano 4Gb!')
+        elif reaction.emoji == '🤎':
+            await user.send('Você selecionou o Plano 6Gb!')
+        elif reaction.emoji == '💚':
+            await user.send('Você selecionou o Plano 8Gb!')
+        elif reaction.emoji == '💛':
+            await user.send('Você selecionou o Plano 12Gb!')
+        elif reaction.emoji == '💜':
+            await user.send('Você selecionou o Plano 16Gb!')
+        elif reaction.emoji == '❔':
+            await user.send("# Suporte Especializado\nNosso **Suporte Especializado** foi criado para oferecer uma **experiência completa e personalizada** para os jogadores de Minecraft que desejam **otimizar seus servidores e modpacks**. \nCom uma taxa adicional de apenas **R$ 9,90**, você terá acesso a uma série de serviços que garantem que seu servidor esteja sempre funcionando da melhor forma possível. \n## **Veja o que está incluído:**\n### Configuração de Servidores: \nNossa equipe especializada irá **configurar seu servidor Minecraft** de acordo com suas necessidades, garantindo que tudo esteja pronto para você e seus amigos jogarem sem complicações.\n### Configuração de Modpacks: \nSe você deseja jogar com **modpacks personalizados**, cuidaremos de toda a configuração necessária, garantindo que todos os mods funcionem perfeitamente juntos.\n### Criação de Modpacks: \nSe você tem uma ideia específica em mente, podemos ajudar a **criar um modpack personalizado** que atenda às suas expectativas e ao estilo de jogo desejado.\n### Manutenção do Servidor: \nMantemos seu servidor **atualizado e funcionando sem problemas.** Isso inclui atualizações regulares, monitoramento de desempenho e resolução de quaisquer problemas que possam surgir.\n### Atendimento Prioritário: \nCom o **Suporte Especializado**, você terá acesso a **atendimento prioritário**. Isso significa que suas solicitações e dúvidas serão tratadas com urgência, garantindo que você obtenha respostas e soluções mais rapidamente.\nAproveite essa oportunidade para ter um servidor Minecraft **configurado e mantido por profissionais**, permitindo que você se concentre apenas em se divertir!")
 
 # Função para apagar mensagens antigas no canal
 async def deleteChat(id:int,bot):
