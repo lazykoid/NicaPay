@@ -1,0 +1,9 @@
+services:
+  my-python-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: my-python-container
+    volumes:
+      - .:/app  # Mount the current directory to /app inside the container
+    restart: unless-stopped  # Optional: restart policy
