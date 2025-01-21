@@ -1,2 +1,2 @@
-# Niczx
-DiscordBot to handle payments via MercadoPago
+# NicaPay
+DiscordBot that manages/handle payments using MercadoPago API.
