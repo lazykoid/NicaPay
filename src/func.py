@@ -2,14 +2,6 @@ from discord.ext import commands
 import discord
 import payment
 
-# Preços de Planos
-# 4Gb 29,9 Recomendado para SMP/Survival Vanilla Pequenos.
-# 6Gb 39,9 Recomendado para Modpacks Médios e até 6 players
-# 8Gb 49,9 Recomendado para Modpacks Médios/Grandes e até 8 players
-# 12Gb 69,9 Recomendado para Modpacks Grandes e até 12+ players
-# 16Gb 89,9 Recomendado para Modpacks Grandes e até 16+ players
-# Support++ mais 10,00
-
 async def paymentMessage(id:int,bot):
     def checkUserReaction(reaction, user):
         return user != bot.user and reaction.message == message
@@ -42,7 +34,7 @@ async def paymentMessage(id:int,bot):
             Para saber mais sobre o Suporte Especializado clique no 👻
             ** 
         """,
-        color=discord.Color.green(),
+        color=discord.Color.from_str("#6eaf5e"),
         timestamp=discord.utils.utcnow()
     )
 
@@ -62,7 +54,6 @@ async def paymentMessage(id:int,bot):
 
     reaction, user = await bot.wait_for('reaction_add', check=checkUserReaction)
 
-    # Handle user reaction
     if reaction.emoji == '❤️':
         await channel.send('Você selecionou o Plano 4Gb!')
     elif reaction.emoji == '🤎':

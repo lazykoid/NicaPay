@@ -1,6 +1,6 @@
 import mercadopago
 sdk = mercadopago.SDK("APP_USR-2733442010410611-012009-a605d25617a3512ac258afe7e6b62021-2224050184")
-
+# Supondo que você já tenha a variável requests definida conforme anteriormente
 requests = {
     "items": [
         {
@@ -17,7 +17,7 @@ requests = {
             "id": "2",
             "title": "Servidor 6Gb/Padrão",
             "description": "Servidor Minecraft 6Gb/Padrão",
-            "picture_url": "https://static.wikia.nocookie.net/minecraft_gamepedia/images/c/c1/Oak_Planks.png/revision/latest/scale-to-width-down/250?cb=20220112085657",
+            "picture_url": "https://static.wikia.nocookie.net/minecraft_gamepedia/images/2/2f/Dirt.png/revision/latest?cb=20220112085643",
             "category_id": "server",
             "quantity": 1,
             "currency_id": "BRL",
@@ -27,7 +27,7 @@ requests = {
             "id": "3",
             "title": "Servidor 8Gb/Avançado",
             "description": "Servidor Minecraft 8Gb/Avançado",
-            "picture_url": "https://static.wikia.nocookie.net/minecraft_gamepedia/images/7/72/Block_of_Gold_JE6_BE3.png/revision/latest?cb=20200226013525",
+            "picture_url": "https://static.wikia.nocookie.net/minecraft_gamepedia/images/2/2f/Dirt.png/revision/latest?cb=20220112085643",
             "category_id": "server",
             "quantity": 1,
             "currency_id": "BRL",
@@ -37,7 +37,7 @@ requests = {
             "id": "4",
             "title": "Servidor 12Gb/Extremo",
             "description": "Servidor Minecraft 12Gb/Extremo",
-            "picture_url": "https://static.wikia.nocookie.net/minecraft_gamepedia/images/c/c8/Block_of_Diamond_JE5_BE3.png/revision/latest?cb=20200226013851",
+            "picture_url": "https://static.wikia.nocookie.net/minecraft_gamepedia/images/2/2f/Dirt.png/revision/latest?cb=20220112085643",
             "category_id": "server",
             "quantity": 1,
             "currency_id": "BRL",
@@ -47,7 +47,7 @@ requests = {
             "id": "5",
             "title": "Servidor 16Gb/Extremo",
             "description": "Servidor Minecraft 16Gb/Extremo",
-            "picture_url": "https://static.wikia.nocookie.net/minecraft_gamepedia/images/3/31/Block_of_Netherite_JE1_BE1.png/revision/latest?cb=20200320021504",
+            "picture_url": "https://static.wikia.nocookie.net/minecraft_gamepedia/images/2/2f/Dirt.png/revision/latest?cb=20220112085643",
             "category_id": "server",
             "quantity": 1,
             "currency_id": "BRL",
@@ -57,22 +57,34 @@ requests = {
 }
 
 def createPayment(id: int):
-    match id:
-        case 1:
-            return {"items": [requests["items"][0]]}  # Retorna o dicionário do servidor 4Gb/Padrão
-        case 2:
-            return {"items": [requests["items"][1]]}  # Retorna o dicionário do servidor 6Gb/Padrão
-        case 3:
-            return {"items": [requests["items"][2]]}  # Retorna o dicionário do servidor 8Gb/Avançado
-        case 4:
-            return {"items": [requests["items"][3]]}  # Retorna o dicionário do servidor 12Gb/Extremo
-        case 5:
-            return {"items": [requests["items"][4]]}  # Retorna o dicionário do servidor 16Gb/Extremo
-        case _:
-            return None  # Caso não encontre nenhum item correspondente
+    # Encontrar o item correspondente com o id
+    item = next((item for item in requests["items"] if int(item["id"]) == id), None)
+    
+    match item:
+        case None:
+            return None  # Retorna None se o item não for encontrado
+        case {'id': id, 'title': title, 'description': description, 'unit_price': unit_price}:
+            return {
+                "id": id,
+                "title": title,
+                "description": description,
+                "unit_price": unit_price
+            }
 
-def makeRequest(order:dict):
-	preference_response = sdk.preference().create(order)
-	preference = preference_response["response"]
-	print(preference['init_point'])
-	print(preference)
+# Testando a função
+result = createPayment(2)
+if result:
+    print(result)  # Aqui você pode usar os dados retornados como quiser
+else:
+    print("Item não encontrado.")
+
+# Você pode usar o resultado em outra função
+def processPayment(payment_info):
+    if payment_info:
+        # Lógica para processar o pagamento
+        print(f"Processando pagamento para: {payment_info['title']} no valor de {payment_info['unit_price']} BRL")
+    else:
+        print("Nenhum pagamento para processar.")
+
+# Testando a função de processamento com o resultado
+processPayment(result)
