@@ -2,7 +2,18 @@ from discord.ext import commands
 import discord
 import payment
 
+# Preços de Planos
+# 4Gb 29,9 Recomendado para SMP/Survival Vanilla Pequenos.
+# 6Gb 39,9 Recomendado para Modpacks Médios e até 6 players
+# 8Gb 49,9 Recomendado para Modpacks Médios/Grandes e até 8 players
+# 12Gb 69,9 Recomendado para Modpacks Grandes e até 12+ players
+# 16Gb 89,9 Recomendado para Modpacks Grandes e até 16+ players
+# Support++ mais 10,00
+
 async def paymentMessage(id:int,bot):
+    def checkUserReaction(reaction, user):
+        return user != bot.user and reaction.message == message
+    
     # Get the channel object
     channel = bot.get_channel(id)
     
@@ -10,35 +21,61 @@ async def paymentMessage(id:int,bot):
     embed = discord.Embed(
         title="Planos de Servidores!",
         type="rich",
-        description="Clique na reação correspondente ao Plano.",
-        color=discord.Color.blue()
-    )
-    embed.add_field(    
-        name="# testing",
-        value="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        description="""
+            ## 4Gb RAM e Processamento Padrão - R$ 29,90
+            ### Recomendado para SMP/Survival Vanilla Pequenos.
+            Clique no ❤️ para selecionar-lo!
+            ## 6Gb RAM e Processamento Padrão - R$ 39,90
+            ### Recomendado para Modpacks Médios e até 6 players
+            Clique no 🤎 para selecionar-lo!
+            ## 8Gb RAM e Processamento Avançado - R$ 49,90 
+            ### Recomendado para Modpacks Médios/Grandes e até 8 players
+            Clique no 💚 para selecionar-lo!
+            ## 12Gb RAM e Processamento Extremo - R$ 69,90
+            ### Recomendado para Modpacks Grandes e até 12+ players
+            Clique no 💛 para selecionar-lo!
+            ## 16Gb RAM e Processamento Extremo - R$ 89,90
+            ### Recomendado para Modpacks Grandes e até 16+ players
+            Clique no 💜 para selecionar-lo!
+
+            **Suporte Especializado será acrescentado mais R$ 10,00!
+            Para saber mais sobre o Suporte Especializado clique no 👻
+            ** 
+        """,
+        color=discord.Color.green(),
+        timestamp=discord.utils.utcnow()
     )
 
+    embed.set_footer(
+        text="@koidfas"
+    )
     # Send the embedded message to the channel
     message = await channel.send(embed=embed)
     
     # Add reactions as buttons
-    await message.add_reaction('👍')  # Plano 1
-    await message.add_reaction('👎')  # Plano 2
-    await message.add_reaction('🤝')  # Plano 3
+    await message.add_reaction('❤️')  
+    await message.add_reaction('🤎')  
+    await message.add_reaction('💚')
+    await message.add_reaction('💛')
+    await message.add_reaction('💜')
+    await message.add_reaction('👻')
 
-    # Wait for user reaction
-    def check(reaction, user):
-        return user != bot.user and reaction.message == message
-
-    reaction, user = await bot.wait_for('reaction_add', check=check)
+    reaction, user = await bot.wait_for('reaction_add', check=checkUserReaction)
 
     # Handle user reaction
-    if reaction.emoji == '👍':
-        await channel.send('Você selecionou o Plano 1!')
-    elif reaction.emoji == '👎':
-        await channel.send('Você selecionou o Plano 2!')
-    elif reaction.emoji == '🤝':
-        await channel.send('Você selecionou o Plano 3!')
+    if reaction.emoji == '❤️':
+        await channel.send('Você selecionou o Plano 4Gb!')
+    elif reaction.emoji == '🤎':
+        await channel.send('Você selecionou o Plano 6Gb!')
+    elif reaction.emoji == '💚':
+        await channel.send('Você selecionou o Plano 8Gb!')
+    elif reaction.emoji == '💛':
+        await channel.send('Você selecionou o Plano 12Gb!')
+    elif reaction.emoji == '💜':
+        await channel.send('Você selecionou o Plano 16Gb!')
+    elif reaction.emoji == '👻':
+        await channel.send('Enviamos uma mensagem no seu privado!')
+
 
 async def deleteChat(id:int,bot):
     tmp = bot.get_channel(1330954025767800954)
