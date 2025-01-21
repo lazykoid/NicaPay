@@ -56,14 +56,19 @@ async def paymentMessage(id:int,bot):
 
     if reaction.emoji == '❤️':
         await channel.send('Você selecionou o Plano 4Gb!')
+        await channel.send('Após o pagamento, enviar comprovante para @koidfas!')
     elif reaction.emoji == '🤎':
         await channel.send('Você selecionou o Plano 6Gb!')
+        await channel.send('Após o pagamento, enviar comprovante para @koidfas!')
     elif reaction.emoji == '💚':
         await channel.send('Você selecionou o Plano 8Gb!')
+        await channel.send('Após o pagamento, enviar comprovante para @koidfas!')
     elif reaction.emoji == '💛':
         await channel.send('Você selecionou o Plano 12Gb!')
+        await channel.send('Após o pagamento, enviar comprovante para @koidfas!')
     elif reaction.emoji == '💜':
         await channel.send('Você selecionou o Plano 16Gb!')
+        await channel.send('Após o pagamento, enviar comprovante para @koidfas!')
     elif reaction.emoji == '❔':
         await user.send("""
         # Suporte Especializado
