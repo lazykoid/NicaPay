@@ -1,4 +1,7 @@
-while[ true ]; do
+#!/bin/bash
+
+while [ true ]; do
+
     python3 bot.py
 
     echo Bot Restarting...
