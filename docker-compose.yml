@@ -1,9 +1,12 @@
 services:
-  my-python-app:
+  nica-pay:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: my-python-container
+    container_name: nica-pay
+    env_file:
+      - .env # Reference the .env file
     volumes:
-      - .:/app  # Mount the current directory to /app inside the container
-    restart: unless-stopped  # Optional: restart policy
+      - .:/app
+    working_dir: /app
+    command: ["python3", "src/bot.py"]

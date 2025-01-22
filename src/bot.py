@@ -19,4 +19,4 @@ async def on_ready():
     await paymentMessage(id=id, bot=bot)  
 
 # Inicia o bot com o token fornecido
-bot.run('MTMzMDg5NjI5NzIwNDUxOTAzMw.G4-2Re.jiLdEYpvL10KKsZbr-EkZ3dDGT7dm00CJRoS4w')
+bot.run('DISCORD-KEY')
