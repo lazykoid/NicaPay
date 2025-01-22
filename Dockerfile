@@ -10,9 +10,6 @@ RUN apk add --no-cache git
 # Install dependencies
 RUN pip install mercadopago discord.py
 
-# Clone the repository
-RUN git clone https://github.com/lazykoid/NicaPay.git
-
 # Copy your bot files into the container
 COPY . /app
 
