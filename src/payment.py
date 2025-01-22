@@ -1,6 +1,9 @@
 import mercadopago
+import os
+
+mercadoPagoKey = discord_token = os.getenv("MERCADO-KEY")
 # Inicializando o SDK do Mercado Pago com a chave de aplicativo
-sdk = mercadopago.SDK("MERCADO-KEY")
+sdk = mercadopago.SDK(mercadoPagoKey)
 # Definindo os itens disponíveis para compra num dicionario-lista.
 requests = {
     "items": [

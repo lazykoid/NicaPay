@@ -1,10 +1,12 @@
 from func import *  
 from discord.ext import commands  
 import discord 
+import os
 
 # Configurando os intents e a instância do bot
 intents = discord.Intents.default()  
 intents.message_content = True
+discordKey = discord_token = os.getenv("DISCORD-KEY")
 
 # Inicializa o bot com o prefixo '!' e os intents definidos
 bot = commands.Bot(command_prefix='!', intents=intents)  
@@ -19,4 +21,4 @@ async def on_ready():
     await paymentMessage(id=id, bot=bot)  
 
 # Inicia o bot com o token fornecido
-bot.run('DISCORD-KEY')
+bot.run(discordKey)
