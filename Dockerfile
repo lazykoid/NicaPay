@@ -17,4 +17,4 @@ RUN echo "discord.py\nmercadopago" > requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Command to run the script
-CMD ["python3", "bot.py"]
+CMD ["python3","src/bot.py"]

@@ -82,7 +82,7 @@ async def paymentMessage(id:int,bot):
 
 # Função para apagar mensagens antigas no canal
 async def deleteChat(id:int,bot):
-    tmp = bot.get_channel(1330954025767800954)
+    tmp = bot.get_channel(id)
     async for message in tmp.history(limit=1):
         if message:
             await tmp.purge(limit=None)
