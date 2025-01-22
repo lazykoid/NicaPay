@@ -5,7 +5,7 @@ services:
       dockerfile: Dockerfile
     container_name: nica-pay
     env_file:
-      - .env # Reference the .env file
+      - .env 
     volumes:
       - .:/app
     working_dir: /app
