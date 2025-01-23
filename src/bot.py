@@ -8,7 +8,8 @@ intents = discord.Intents.default()
 intents.message_content = True
 
 # .env
-id = 1331368645149855754
+idPayment = 1331368645149855754
+idReaction = 1331977885367537724
 discordKey = os.getenv("DISCORD-KEY")
 
 # Inicializa o bot com o prefixo '!' e os intents definidos
@@ -18,9 +19,14 @@ bot = commands.Bot(command_prefix='!', intents=intents)
 @bot.event
 async def on_ready():    
     print(f'Logged on as {bot.user}!')  
-    print(f'Uptime: {round(bot.latency * 1000)}ms') 
-    await deleteChat(id=id, bot=bot)  
-    await paymentMessage(id=id, bot=bot)  
+    print(f'Uptime: {round(bot.latency * 1000)}ms')
+    # Payment Chat
+    await deleteChat(id=idPayment, bot=bot)  
+    await paymentMessage(id=idPayment, bot=bot)  
+
+    # Reaction Chat
+    await deleteChat(id=idReaction, bot=bot) 
+    await reactPutz(id=idReaction,bot=bot)
 
 # Inicia o bot com o token fornecido
 bot.run(discordKey)
