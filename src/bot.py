@@ -25,8 +25,8 @@ async def on_ready():
     await paymentMessage(id=idPayment, bot=bot)  
 
     # Reaction Chat
-    await deleteChat(id=idReaction, bot=bot) 
-    await reactPutz(id=idReaction,bot=bot)
+    # await deleteChat(id=idReaction, bot=bot) 
+    # await reactPutz(id=idReaction,bot=bot)
 
 # Inicia o bot com o token fornecido
 bot.run(discordKey)
