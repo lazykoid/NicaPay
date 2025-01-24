@@ -27,7 +27,8 @@ async def on_ready():
     asyncio.create_task(deleteChat(id=idReaction, bot=bot))
     asyncio.create_task(deleteChat(id=idPayment, bot=bot))
     
-    
+    await asyncio.sleep(3)
+
     # Mensagens no Chat
     asyncio.create_task(reactPutz(idChannel=idReaction,idRole=idRole,bot=bot))
     asyncio.create_task(paymentMessage(id=idPayment, bot=bot))
