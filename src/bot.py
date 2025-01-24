@@ -23,12 +23,13 @@ async def on_ready():
     print(f'Logged on as {bot.user}!')  
     print(f'Uptime: {round(bot.latency * 1000)}ms')
 
-    # Limpeza e mensagens no Reaction Chat
+    # Limpeza de Chats
     asyncio.create_task(deleteChat(id=idReaction, bot=bot))
-    asyncio.create_task(reactPutz(idChannel=idReaction,idRole=idRole,bot=bot))
-    
-    # Limpeza e mensagens no Payment Chat
     asyncio.create_task(deleteChat(id=idPayment, bot=bot))
+    
+    
+    # Mensagens no Chat
+    asyncio.create_task(reactPutz(idChannel=idReaction,idRole=idRole,bot=bot))
     asyncio.create_task(paymentMessage(id=idPayment, bot=bot))
 
 
