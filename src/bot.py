@@ -10,7 +10,7 @@ intents.message_content = True
 
 # .env
 idPayment = 1331368645149855754
-idReaction = 1332043403424174212
+idReaction = 1332328985794707550
 idRole = 1331603876368875530
 discordKey = os.getenv("DISCORD-KEY")
 
