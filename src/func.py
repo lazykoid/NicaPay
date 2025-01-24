@@ -38,16 +38,17 @@ async def paymentMessage(id:int,bot):
         text="@koidfas"
     )
     
-    message = await channel.send(embed=embed)
-    
-    # Adiciona Reacoes
-    await message.add_reaction('❤️')  
-    await message.add_reaction('🤎')  
-    await message.add_reaction('💚')
-    await message.add_reaction('💛')
-    await message.add_reaction('💜')
-    await message.add_reaction('❔')
-    
+    try:
+        message = await channel.send(embed=embed)
+        await message.add_reaction('❤️')  
+        await message.add_reaction('🤎')  
+        await message.add_reaction('💚')
+        await message.add_reaction('💛')
+        await message.add_reaction('💜')
+        await message.add_reaction('❔')
+    except discord.errors.NotFound as e:
+        print(f"Erro ao enviar mensagem ou adicionar reações: {e}")
+        return
     
     await channel.send('Após o pagamento, enviar comprovante para <@765732852054491167>!')
 
