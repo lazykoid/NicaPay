@@ -2,18 +2,18 @@ from discord.ext import commands
 import discord
 import payment
 
-async def reactPutz(id:int,bot):
+async def reactPutz(idChannel:int,idRole:int,bot):
    def checkUserReaction(reaction, user):
        return user != bot.user and reaction.message == message
    
-   channel = bot.get_channel(id)
+   channel = bot.get_channel(idChannel)
    message = await channel.send("Para jogar o PutzCraft apenas clique na Reação 🪵")
    await message.add_reaction("🪵")
    
    reaction,user = await bot.wait_for('reaction_add',check=checkUserReaction)
 
    if reaction.emoji == "🪵":
-       role = discord.utils.get(user.guild.roles, id=id)
+       role = discord.utils.get(user.guild.roles, id=idRole)
        if role not in user.roles:
            await user.add_roles(role)
    
