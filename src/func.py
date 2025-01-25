@@ -9,13 +9,13 @@ async def reactPutz(idChannel:int,idRole:int,bot):
    channel = bot.get_channel(idChannel)
    message = await channel.send("Para jogar o PutzCraft apenas clique na Reação 🪵")
    await message.add_reaction("🪵")
-   
-   reaction,user = await bot.wait_for('reaction_add',check=checkUserReaction)
+   while True:
+    reaction,user = await bot.wait_for('reaction_add',check=checkUserReaction)
 
-   if reaction.emoji == "🪵":
-       role = discord.utils.get(user.guild.roles, id=idRole)
-       if role not in user.roles:
-           await user.add_roles(role)
+    if reaction.emoji == "🪵":
+        role = discord.utils.get(user.guild.roles, id=idRole)
+        if role not in user.roles:
+            await user.add_roles(role)
    
 
 # Função para enviar uma mensagem de pagamento
