@@ -96,6 +96,8 @@ async def paymentMessage(id:int,bot):
                 timestamp=discord.utils.utcnow()
                 )
             await user.send(embed=embedDM)
+            order = payment.createPayment(6)
+            await user.send(payment.makeRequest(order))
 
 # Função para apagar mensagens antigas no canal
 async def deleteChat(id:int,bot):

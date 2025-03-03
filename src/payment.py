@@ -1,7 +1,7 @@
 import mercadopago
 import os
 
-mercadoPagoKey = discord_token = os.getenv("MERCADO-KEY")
+mercadoPagoKey = os.getenv("MERCADO-KEY")
 # Inicializando o SDK do Mercado Pago com a chave de aplicativo
 sdk = mercadopago.SDK(mercadoPagoKey)
 # Definindo os itens disponíveis para compra num dicionario-lista.
@@ -57,6 +57,16 @@ requests = {
             "currency_id": "BRL",
             "unit_price": 89.9,
         },
+        {
+            "id": "6",
+            "title": "Suporte Especializado",
+            "description": "Suporte Especializado",
+            "picture_url": "https://static.wikia.nocookie.net/minecraft_gamepedia/images/b/b3/Nether_Star.gif/revision/latest/thumbnail/width/360/height/360?cb=20200428015751",
+            "category_id": "server",
+            "quantity": 1,
+            "currency_id": "BRL",
+            "unit_price": 9.9,
+        },
     ]
 }
 # Função para criar um pagamento baseado no ID do item
@@ -72,6 +82,8 @@ def createPayment(id: int):
             return {"items": [requests["items"][3]]}  # Retorna o dicionário do servidor 12Gb/Extremo
         case 5:
             return {"items": [requests["items"][4]]}  # Retorna o dicionário do servidor 16Gb/Extremo
+        case 6:
+            return {"items": [requests["items"][5]]}  # Retorna o dicionário do servidor 16Gb/Extremo
         case _:
             return None  # Caso não encontre nenhum item correspondente
 
